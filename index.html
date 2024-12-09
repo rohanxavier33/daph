@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Love Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      color: #ff4081;
+    }
+    label {
+      font-size: 18px;
+      margin: 10px 0;
+      display: block;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #ff4081;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #e03572;
+    }
+    #output {
+      margin-top: 20px;
+      font-size: 20px;
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <h1>Love Calculator</h1>
+  <label for="trueLove">Who is your true love?</label>
+  <input type="text" id="trueLove" placeholder="Enter their name">
+  
+  <label for="loveAmount">How much do you love them?</label>
+  <input type="number" id="loveAmount" placeholder="Enter a number">
+  
+  <button id="showLoveButton">Show Love</button>
+  
+  <div id="output"></div>
+
+  <script>
+    document.getElementById("showLoveButton").addEventListener("click", function() {
+      const trueLove = document.getElementById("trueLove").value;
+      const loveAmount = parseInt(document.getElementById("loveAmount").value);
+      const outputDiv = document.getElementById("output");
+      
+      outputDiv.innerHTML = ""; // Clear previous output
+      
+      if (!trueLove) {
+        outputDiv.textContent = "Please enter your true love's name.";
+        return;
+      }
+
+      if (isNaN(loveAmount) || loveAmount <= 0) {
+        outputDiv.textContent = `You love ${trueLove} infinitely!`;
+        return;
+      }
+
+      let i = 0;
+
+      const intervalId = setInterval(() => {
+        if (i > loveAmount) {
+          clearInterval(intervalId); // Stop the interval when done
+        } else if (i > 0) {
+          outputDiv.textContent = `You love ${trueLove} x ${i}`;
+          i++;
+        } else {
+          outputDiv.textContent = "Guess what";
+          i++;
+        }
+      }, 3000 / (i > 0 ? i : 1)); // Adjust speed based on iteration
+    });
+  </script>
+</body>
+</html>
